@@ -20,12 +20,12 @@ public:
 	}
 
 
-	Vector(const Vector &вектор)
+	Vector(const Vector &vector)
 	{ // Конструктор копирования
-		n = вектор.n;
+		n = vector.n;
 		p = new double[n];
 		for (int z = 0; z < n; z++)
-			p[z] = вектор.p[z];
+			p[z] = vector.p[z];
 	}
 
 
