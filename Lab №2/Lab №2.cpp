@@ -30,11 +30,11 @@ public:
 
 
     // Конструктор перемещения
-	Vector(Vector&& вектор1) // Параметр - правосторонняя ссылкa
-		:p(вектор1.p), n(вектор1.n)
+	Vector(Vector&& vector1) // Параметр - правосторонняя ссылкa
+		:p(vector1.p), n(vector1.n)
 	{
-		вектор1.p = nullptr;
-		вектор1.n = 0;
+		vector1.p = nullptr;
+		vector1.n = 0;
 	}
 
 
@@ -52,13 +52,13 @@ public:
 	}
 
 
-	Vector &operator =(const Vector &вектор2) // Оператор- функция копирования объекта
+	Vector &operator =(const Vector &vector2) // Оператор- функция копирования объекта
 	{
-		n = вектор2.n;
+		n = vector2.n;
 		if (p!= nullptr) delete[] p; // Освобождаем память старого вектора
 		p = new double[n]; // Выделяем память для нового вектора
 		for (int z = 0; z < n; z++)
-			p[z] = вектор2.p[z];
+			p[z] = vector2.p[z];
 		return *this; // Возвращаем ссылку на текущий объект
 	}
 
@@ -68,18 +68,18 @@ public:
 		if (p != nullptr) 
 			delete[] p; // Освобождаем память
 	}
-	friend class Vector &operator *(double x, Vector &вектор2); // Дружественная функция,определенная вне класса
+	friend class Vector &operator *(double x, Vector &vector2); // Дружественная функция,определенная вне класса
 };
 
 
 // Умножение числа на вектор (первый операнд не объект класса,
 // функция обязательно определяется вне класса)
-Vector &operator *(double x, Vector &вектор2) // Оператор- функция вне класса
+Vector &operator *(double x, Vector & vector2) // Оператор- функция вне класса
 {
-	double *p = new double[вектор2.n]; // Создаем новый массив
-	for (int z = 0; z < вектор2.n; z++) 
-		p[z] = x * вектор2.p[z]; // Заполняем массив
-	Vector *pV = new Vector(p, вектор2.n); // Создаем новый объект на основе массива
+	double *p = new double[vector2.n]; // Создаем новый массив
+	for (int z = 0; z < vector2.n; z++)
+		p[z] = x * vector2.p[z]; // Заполняем массив
+	Vector *pV = new Vector(p, vector2.n); // Создаем новый объект на основе массива
 	delete[] p;
 	return *pV; // Возвращаем ссылку на объект
 }
